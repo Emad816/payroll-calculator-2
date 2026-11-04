@@ -1,14 +1,17 @@
 package com.pluralsight;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.util.Scanner;
 
 public class PayrollCalculatorApp {
     public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
 
-        String fileName = "src/main/resources/employees.csv";
+        System.out.print("Enter the name of the file to process: ");
+        String fileName = "src/main/resources/" + input.nextLine();
+
+        System.out.print("Enter the name of the payroll file to create: ");
+        String payrollFileName = "src/main/resources/" + input.nextLine();
 
         try {
             //Open the file with FileReader and wrap it in a BufferedReader
@@ -16,6 +19,11 @@ public class PayrollCalculatorApp {
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             String line = bufferedReader.readLine(); // throw away header
+
+            FileWriter fileWriter = new FileWriter(payrollFileName);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+            bufferedWriter.write("id|name|gross pay\n");
 
             while ((line = bufferedReader.readLine()) != null) {
 
@@ -31,13 +39,15 @@ public class PayrollCalculatorApp {
                 //Creating new employee object using data above
                 Employee employee = new Employee(employeeId, name, hoursWorked, payRate);
 
-                System.out.printf("Id: %d  Name: %s  Gross Pay: $%.2f%n",
+                String k = String.format("%d|%s%.2f%n",
                         employee.getEmployeeId(),
                         employee.getName(),
                         employee.getGrossPay());
+                bufferedWriter.write(k);
             }
 
             bufferedReader.close();
+            bufferedWriter.close();
 
         } catch (FileNotFoundException e) {
             System.out.println("file doesn't exist: " + fileName);

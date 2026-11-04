@@ -39,11 +39,11 @@ public class PayrollCalculatorApp {
                 //Creating new employee object using data above
                 Employee employee = new Employee(employeeId, name, hoursWorked, payRate);
 
-                String k = String.format("%d|%s|%.2f\n",
+                String outputLine = String.format("%d|%s|%.2f\n",
                         employee.getEmployeeId(),
                         employee.getName(),
                         employee.getGrossPay());
-                bufferedWriter.write(k);
+                bufferedWriter.write(outputLine);
             }
 
             bufferedReader.close();

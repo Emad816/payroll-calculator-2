@@ -31,34 +31,16 @@ public class PayrollCalculatorApp {
                 //Creating new employee object using data above
                 Employee employee = new Employee(employeeId, name, hoursWorked, payRate);
 
-                System.out.printf();
-
-
-
-
-
+                System.out.printf("Id: %d  Name: %s  Gross Pay: $%.2f%n",
+                        employee.getEmployeeId(),
+                        employee.getName(),
+                        employee.getGrossPay());
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            fileReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("file doesn't exist: " + fileName);
         }catch (IOException e){
             System.out.println("IO Exception: " + e.getMessage());
         }
-
-
     }
 }

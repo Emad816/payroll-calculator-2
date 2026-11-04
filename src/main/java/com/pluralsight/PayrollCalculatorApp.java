@@ -15,12 +15,12 @@ public class PayrollCalculatorApp {
             FileReader fileReader =  new FileReader(fileName);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-            String line = bufferedReader.readLine();
+            String line = bufferedReader.readLine(); // throw away header
 
-            while (line != null) {
+            while ((line = bufferedReader.readLine()) != null) {
 
                 //Split the line using (|)
-                String[] lineParts = line.split("//|");
+                String[] lineParts = line.split("\\|");
 
                 //Assigning line parts to variables
                 int employeeId = Integer.parseInt(lineParts[0]);
@@ -36,7 +36,9 @@ public class PayrollCalculatorApp {
                         employee.getName(),
                         employee.getGrossPay());
             }
-            fileReader.close();
+
+            bufferedReader.close();
+
         } catch (FileNotFoundException e) {
             System.out.println("file doesn't exist: " + fileName);
         }catch (IOException e){

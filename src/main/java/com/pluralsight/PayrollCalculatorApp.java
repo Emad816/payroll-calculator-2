@@ -53,7 +53,7 @@ public class PayrollCalculatorApp {
                     if(!isFirst) {
                         bufferedWriter.write(",\n");
                     }
-                    String outputLine = String.format("{ \"id\": %d, \"name\" : \"%s\", \"grossPay\" : %.2f }",
+                    String outputLine = String.format("\t{ \"id\": %d, \"name\" : \"%s\", \"grossPay\" : %.2f }",
                             employee.getEmployeeId(),
                             employee.getName(),
                             employee.getGrossPay());
